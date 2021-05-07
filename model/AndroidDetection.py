@@ -1,6 +1,7 @@
 from libraries.AgvSim import AvgSim
 from libraries.libraries import create_vector_with_label, get_apis, load_pkl, create_app_api_matrix
 import numpy as np
+import shutil
 
 
 class AndroidDetection:
@@ -21,4 +22,5 @@ class AndroidDetection:
         avg_sim = AvgSim(self.__app_api, self.__invoke, self.__package, self.__method)
         feature_vector = create_vector_with_label(avg_sim, self.__benign)
         test_feature_vector = [feature_vector[len(feature_vector) - 1]]
+        shutil.rmtree(path=path)
         return test_feature_vector
