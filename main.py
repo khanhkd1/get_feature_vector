@@ -4,16 +4,18 @@ from os import listdir
 from os.path import isfile, join
 import numpy as np
 
-MALWARE_PATH = '/Users/xxxibkhnhkd/Downloads/bộ_test_apk_2000malware_1000benign/malware'
-BENIGN_PATH = '/Users/xxxibkhnhkd/Downloads/bộ_test_apk_2000malware_1000benign/benign'
+MALWARE_PATH = '/Users/khnhkd/Downloads/cic_1000_malware'
+# BENIGN_PATH = '/Users/xxxibkhnhkd/Downloads/bộ_test_apk_2000malware_1000benign/benign'
 
 
 if __name__ == '__main__':
     model = AndroidDetection()
     malware_files = [f for f in listdir(MALWARE_PATH) if isfile(join(MALWARE_PATH, f))]
-    benign_files = [f for f in listdir(BENIGN_PATH) if isfile(join(BENIGN_PATH, f))]
+    # benign_files = [f for f in listdir(BENIGN_PATH) if isfile(join(BENIGN_PATH, f))]
 
     matrix_test_apps = []
+
+    print(f'Số lượng app: {len(malware_files)}')
 
     for i, malware_file in enumerate(malware_files):
         print(f'##### STT {i}: {malware_file}')
@@ -21,10 +23,10 @@ if __name__ == '__main__':
         print(vector)
         matrix_test_apps.append(vector)
 
-    for i, benign_file in enumerate(benign_files):
-        print(f'##### STT {i}: {benign_file}')
-        vector = model.create_app_vector(decompile_apk(path=BENIGN_PATH, apk_file=benign_file))[0].tolist() + [0]
-        print(vector)
-        matrix_test_apps.append(vector)
+    # for i, benign_file in enumerate(benign_files):
+    #     print(f'##### STT {i}: {benign_file}')
+    #     vector = model.create_app_vector(decompile_apk(path=BENIGN_PATH, apk_file=benign_file))[0].tolist() + [0]
+    #     print(vector)
+    #     matrix_test_apps.append(vector)
 
-    save_pkl('./data_12000_app/matrix_test_apps.pkl', np.array(matrix_test_apps))
+    save_pkl('/Users/khnhkd/Downloads/cic_1000_malware/cic_1000_malware.pkl', np.array(matrix_test_apps))

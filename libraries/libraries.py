@@ -4,35 +4,13 @@ import re
 import pickle
 from collections import defaultdict
 
-UPLOAD_FOLDER = './save_file_folder'
-DECOMPILE_FOLDER = './decompile_folder'
 
-
-def save_uploaded_file(st, file):
-    if not os.path.exists(UPLOAD_FOLDER):
-        os.makedirs(UPLOAD_FOLDER)
-    with open(os.path.join(UPLOAD_FOLDER, file.name), "wb") as f:
-        f.write(file.getbuffer())
-    st.success(f"Saved File: {file.name} to {UPLOAD_FOLDER}")
-    return f"{file.name}"
-
-
-# def decompile_apk(st, apk_file):
-#     if not os.path.exists(DECOMPILE_FOLDER):
-#         os.makedirs(DECOMPILE_FOLDER)
-#     apk_file_name = apk_file.replace('.apk', '')
-#     os.system(f"apktool d {UPLOAD_FOLDER}/{apk_file} -o {DECOMPILE_FOLDER}/{apk_file_name} -f")
-#     os.system(f"rm {UPLOAD_FOLDER}/{apk_file}")
-#     st.success(f"Completely decompiled")
-#     return f"{DECOMPILE_FOLDER}/{apk_file_name}"
-
-
-def decompile_apk(path, apk_file):
-    if not os.path.exists(DECOMPILE_FOLDER):
-        os.makedirs(DECOMPILE_FOLDER)
+def decompile_apk(path, apk_file, decompile_folder='./decompile_folder'):
+    if not os.path.exists(decompile_folder):
+        os.makedirs(decompile_folder)
     apk_file_name = apk_file.replace('.apk', '')
-    os.system(f"apktool d {path}/{apk_file} -o {DECOMPILE_FOLDER}/{apk_file_name} -f")
-    return f"{DECOMPILE_FOLDER}/{apk_file_name}"
+    os.system(f"apktool d {path}/{apk_file} -o {decompile_folder}/{apk_file_name} -f")
+    return f"{decompile_folder}/{apk_file_name}"
 
 
 """--------------------------------------------------------"""
